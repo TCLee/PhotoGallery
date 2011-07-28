@@ -64,21 +64,21 @@ Utilities/TCReachability.{h/m}
     Wrapper around DDG's Reachability class (which is an enhancement to Apple's Reachability class) 
     to provide a simpler API for checking network reachability.
     
-Library/ASIHTTPRequest [Ben Copsley]
+Library/ASIHTTPRequest [Ben Copsey]
     ASIHTTPRequest is an easy to use wrapper around the CFNetwork API that makes some of the more 
     tedious aspects of communicating with web servers easier.
 
-Library/ASIHTTPRequest/Reachability.{h/m} [DDG]
+Library/ASIHTTPRequest/Reachability.{h/m} [Andrew W. Donoho]
     Modification of Apple's Reachability class.
 
-Library/UIImageUtilities [Trevor Haman]
+Library/UIImageUtilities [Trevor Harmon]
     UIImage utilities to resize images and create thumbnails.
 
-Library/MBProgressHUD []
+Library/MBProgressHUD [Matej Bukovinski]
     MBProgressHUD is meant as a replacement for the undocumented, private 
     UIKit UIProgressHUD with some additional features.
 
-Library/EasyTableView []
+Library/EasyTableView [Aleksey Novicov]
     Horizontal scrolling UITableView.
 
 Library/SynthesizeSingleton [Matt Gallagher from Cocoa with Love]
