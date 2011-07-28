@@ -9,12 +9,12 @@
 #import "XMLFeed.h"
 #import "TCFileHelper.h"
 #import "ASIHTTPRequest.h"
+#import "ASIDownloadCache.h"
 
 
 #pragma mark Constants
 
 static NSString * const kImagesXML = @"http://sapphire2.adrenalin.my/application_images/image_locations.xml";
-static NSString * const kImageURLsPlistFilename = @"image_urls.plist";
 
 
 #pragma mark -
@@ -22,11 +22,9 @@ static NSString * const kImageURLsPlistFilename = @"image_urls.plist";
 
 @interface XMLFeed ()
 
-@property (nonatomic, readonly) NSString *imageURLsPlistFilePath;
 @property (nonatomic, readonly) NSOperationQueue *parseQueue;
 
 @end
-
 
 
 #pragma mark -
@@ -51,15 +49,6 @@ static NSString * const kImageURLsPlistFilename = @"image_urls.plist";
 #pragma mark -
 #pragma mark Properties Accessors
 
-- (NSString *) imageURLsPlistFilePath {
-    if (nil == _imageURLsPlistFilePath) {        
-        _imageURLsPlistFilePath = [[[TCFileHelper sharedHelper].documentsDirectory 
-                                    stringByAppendingPathComponent: kImageURLsPlistFilename] 
-                                   copy];
-    }
-    return _imageURLsPlistFilePath;
-}
-
 - (NSOperationQueue *) parseQueue {
     if (nil == _parseQueue) {
         _parseQueue = [[NSOperationQueue alloc] init];
@@ -72,34 +61,33 @@ static NSString * const kImageURLsPlistFilename = @"image_urls.plist";
 #pragma mark Fetch and Parse XML Feed
 
 - (void) fetch {
-    // Check if parsed results already exists.
-    NSArray *result = [[NSArray alloc] initWithContentsOfFile: self.imageURLsPlistFilePath];
+    NSURL *url = [[NSURL alloc] initWithString: kImagesXML];
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL: url];
     
-    if (result) {
-        // If parsed result already exists, then just load it from file.
-        [self.delegate xmlFeedDidFinishWithResult: result];
-    } else {
-        // Else, download and parse XML.              
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL: 
-                                   [NSURL URLWithString: kImagesXML]];        
-        [request setDelegate: self];
-        [request startAsynchronous];        
-        
-        // Notify delegate that we have started download of XML feed.
-        [self.delegate xmlFeedDidStartDownload: self];
-    }
+    // Cache this request so that we don't have to redownload the XML data
+    // again, if it's not modified.
+    [request setDownloadCache: [ASIDownloadCache sharedCache]];
+    [request setCacheStoragePolicy: ASICachePermanentlyCacheStoragePolicy];
     
-    [result release], result = nil;
+    [request setDelegate: self];
+    [request startAsynchronous];
+    
+    [url release], url = nil;
+    [request release], request = nil;
 }
 
 
 #pragma mark -
 #pragma mark ASIHTTPRequest Delegate
 
+- (void) requestStarted: (ASIHTTPRequest *) request {
+    [self.delegate xmlFeedDidStartDownload: self];    
+}
+
 - (void) requestFinished: (ASIHTTPRequest *) request {
-    // Create the parse operation and add it to the queue to start it asynchronously.
-    ParseOperation *parseOperation = [[ParseOperation alloc] initWithData: [request responseData] 
-                                                                 delegate: self];
+    ParseOperation *parseOperation = [[ParseOperation alloc] 
+                                      initWithData: [request responseData] 
+                                      delegate: self];
     [self.parseQueue addOperation: parseOperation];
     [parseOperation release], parseOperation = nil;
 }
@@ -112,11 +100,8 @@ static NSString * const kImageURLsPlistFilename = @"image_urls.plist";
 #pragma mark -
 #pragma mark ParseOperation Delegate
 
-- (void) parserDidFinishParsingWithResult: (NSArray *) result {
-    // Save parsed results to disk, so we can just load it from disk next time.    
-    [result writeToFile: self.imageURLsPlistFilePath atomically: YES];
-    
-    [self.delegate xmlFeedDidFinishWithResult: result];
+- (void) parserDidFinishParsingWithResult: (NSArray *) result {        
+    [self.delegate xmlFeed: self didFinishWithResult: result];
 }
 
 - (void) parserDidFailWithError: (NSError *) error {

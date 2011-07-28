@@ -22,7 +22,6 @@
     
 @private
     id <XMLFeedDelegate> _delegate;
-    NSString *_imageURLsPlistFilePath;
     NSOperationQueue *_parseQueue;
 }
 
@@ -42,6 +41,8 @@
 
 @protocol XMLFeedDelegate <NSObject>
 
+@required
+
 /** Called when started downloading XML feed. */
 - (void) xmlFeedDidStartDownload: (XMLFeed *) xmlFeed;
 
@@ -49,7 +50,7 @@
 - (void) xmlFeed: (XMLFeed *) xmlFeed didFailWithError: (NSError *) error;
 
 /** Called when XML feed has been parsed. */
-- (void) xmlFeedDidFinishWithResult: (NSArray *) result;
+- (void) xmlFeed: (XMLFeed *) xmlFeed didFinishWithResult: (NSArray *) result;
 
 @end
 
