@@ -14,7 +14,7 @@ FEATURES
 - EasyTableView UI component is used for displaying and scrolling through a large set of 
   thumbnails efficiently.
 - ASIHTTPRequest network library is used for all the networking stuff in this project.
-- Download of photos can be resumed in the event of the connection being dropped.
+- Download of photos can be resumed in the event of a dropped connection.
 - Image cache that loads and saves images asynchronously. (i.e. Loading a large image
   from disk cache will not cause the UI to block.)
 
