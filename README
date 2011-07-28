@@ -1,0 +1,97 @@
+PhotoGallery
+
+===========================================================================
+DESCRIPTION
+
+The "PhotoGallery" sample project demonstrates how to create a photo gallery that 
+downloads its photos from the web.
+
+===========================================================================
+FEATURES
+
+- UIScrollView and UIGestureRecognizer are used to create a rich user experience that allow 
+  photos to be panned, zoomed, and double tap to zoom in/out.
+- EasyTableView UI component is used for displaying and scrolling through a large set of 
+  thumbnails efficiently.
+- ASIHTTPRequest network library is used for all the networking stuff in this project.
+- Download of photos can be resumed in the event of the connection being dropped.
+- Image cache that loads and saves images asynchronously. (i.e. Loading a large image
+  from disk cache will not cause the UI to block.)
+
+===========================================================================
+SYSTEM REQUIREMENTS
+
+iOS 4.0 or later 
+(Target device is iPad, but you can also run it on an iPhone with some tweaks.)
+
+===========================================================================
+PACKAGING LIST
+
+AppDelegate.{h/m}
+    Configures and displays the application window and initial view controller.
+
+Controller/GalleryViewController.{h/m}
+    Controller that configures and displays the photo and thumbnails view.
+
+View/ThumbnailView.{h/m}
+    View for displaying the thumbnail. ThumbnailView will be used as a cell in a table view.
+
+View/PhotoView.{h/m}
+    View for displaying the photo. Uses UIScrollView to allow photo to be panned and zoomed.
+
+Model/XMLFeed/XMLFeed.{h/m}
+    Downloads the XML feed and creates a NSOperationQueue to run our ParseOperation.
+
+Model/XMLFeed/ParseOperation.{h/m}
+    NSOperation object used to parse the XML RSS feed loaded by XMLFeed.
+
+Model/Photo/Photo.{h/m}
+    Photo model class that represents a photo downloaded from the server. Uses ASIHTTPRequest to 
+    download the photos and ImageCache to load/save photos to cache.
+
+Model/Photo/ImageCache.{h/m}
+    An image cache that loads and saves images asynchronously. Automatically generates 
+    thumbnails for all photos saved to cache. Photos are also optimized before being saved to cache.
+
+Utilities/TCFileHelper.{h/m}
+	Utility class that provides useful methods for accessing the app's sandbox directories.
+
+Utilities/TCDebug.h
+    Debugging tool to log messages to the console window when active build configuration is "Debug".
+    Useful for logging network activities.
+
+Utilities/TCReachability.{h/m}
+    Wrapper around DDG's Reachability class (which is an enhancement to Apple's Reachability class) 
+    to provide a simpler API for checking network reachability.
+    
+Library/ASIHTTPRequest [Ben Copsley]
+    ASIHTTPRequest is an easy to use wrapper around the CFNetwork API that makes some of the more 
+    tedious aspects of communicating with web servers easier.
+
+Library/ASIHTTPRequest/Reachability.{h/m} [DDG]
+    Modification of Apple's Reachability class.
+
+Library/UIImageUtilities [Trevor Haman]
+    UIImage utilities to resize images and create thumbnails.
+
+Library/MBProgressHUD []
+    MBProgressHUD is meant as a replacement for the undocumented, private 
+    UIKit UIProgressHUD with some additional features.
+
+Library/EasyTableView []
+    Horizontal scrolling UITableView.
+
+Library/SynthesizeSingleton [Matt Gallagher from Cocoa with Love]
+    Macro of singleton methods. 
+
+Resources/Images
+    This directory contains the icons used in this project.
+
+===========================================================================
+CHANGES FROM PREVIOUS VERSIONS
+
+Version 1.0
+- First version.
+
+===========================================================================
+Copyright (C) 2011 Lee Tze Cheun. All rights reserved.
