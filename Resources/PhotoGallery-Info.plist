@@ -35,5 +35,9 @@
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon_72.png</string>
+	</array>
 </dict>
 </plist>

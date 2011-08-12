@@ -11,6 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		811BF02813F572A5009C287F /* Icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 811BF02713F572A5009C287F /* Icon_72.png */; };
 		8131F8FA13B5021000AC56B7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8131F8F413B5021000AC56B7 /* MainWindow.xib */; };
 		8181306A13B714830073415D /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8181306913B714830073415D /* PhotoView.m */; };
 		818516FA13D09F5A00B6D9DB /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 818516F913D09F5A00B6D9DB /* Photo.m */; };
@@ -50,6 +51,7 @@
 		1D6058910D05DD3D006BFB54 /* Photo Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		811BF02713F572A5009C287F /* Icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_72.png; sourceTree = "<group>"; };
 		8131F8F413B5021000AC56B7 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8131F8F513B5021000AC56B7 /* PhotoGallery-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PhotoGallery-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		8181306813B714830073415D /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		818744D313D88C0D00319BE6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				811BF02713F572A5009C287F /* Icon_72.png */,
 				818744D413D88C0D00319BE6 /* photoDefault.png */,
 			);
 			path = Images;
@@ -400,6 +403,7 @@
 			files = (
 				8131F8FA13B5021000AC56B7 /* MainWindow.xib in Resources */,
 				818744D513D88C0D00319BE6 /* photoDefault.png in Resources */,
+				811BF02813F572A5009C287F /* Icon_72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
